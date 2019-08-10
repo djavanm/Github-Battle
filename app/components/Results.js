@@ -3,6 +3,7 @@ import { battle } from '../utils/api'
 import { FaCompass, FaBriefcase, FaUsers, FaUserFriends, FaCode, FaUser } from 'react-icons/fa'
 import Card from './Card'
 import PropTypes from 'prop-types'
+import Loading from './Loading'
 
 function ProfileList({ profile }) {
   return (
@@ -35,7 +36,7 @@ function ProfileList({ profile }) {
   )
 }
 
-ProfileList.PropTypes = {
+ProfileList.propTypes = {
   profile: PropTypes.object.isRequired
 }
 
@@ -72,7 +73,7 @@ export default class Results extends React.Component {
     render() {
       const { winner, loser, error, loading } = this.state
       if (loading) {
-        return <p>LOADING</p>
+        return <Loading />
       }
 
       if (error) {
@@ -114,8 +115,8 @@ export default class Results extends React.Component {
 }
 
 
-Results.PropTypes = {
+Results.propTypes = {
   playerOne: PropTypes.string.isRequired,
   playerTwo: PropTypes.string.isRequired,
-  onReset: PropTypes.func.isRequireduired
+  onReset: PropTypes.func.isRequired
 }
