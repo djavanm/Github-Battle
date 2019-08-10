@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaUserFriends, FaFighterJet, FaTrophy, FaTimesCircle } from 'react-icons/fa'
 import PropTypes from 'prop-types'
+import Results from './Results'
 
 function Instructions() {
   return (
@@ -46,6 +47,7 @@ class PlayerInput extends React.Component {
     this.props.onSubmit(this.state.username)
   }
   handleChange(e) {
+    e.preventDefault()
     this.setState({
       username: e.target.value
     })
@@ -109,7 +111,7 @@ function PlayerPreview ( { username, onReset, label } ) {
 }
 
 PlayerPreview.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired
 }
 
@@ -118,7 +120,8 @@ export default class Battle extends React.Component {
     super(props)
     this.state = {
       playerOne: null,
-      playerTwo: null
+      playerTwo: null,
+      battle: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleReset = this.handleReset.bind(this)
@@ -127,6 +130,7 @@ export default class Battle extends React.Component {
     this.setState({
       [id]: player
     })
+    console.log(this)
   }
   handleReset(id) {
    this.setState({
@@ -134,7 +138,12 @@ export default class Battle extends React.Component {
    })
   }
   render() {
-    const { playerOne, playerTwo } = this.state
+    const { playerOne, playerTwo, battle } = this.state
+    
+    if (battle === true ) {
+      return <Results playerOne={playerOne} playerTwo={playerTwo} />
+    }
+
      return (
        <React.Fragment>
          <Instructions />
@@ -158,6 +167,14 @@ export default class Battle extends React.Component {
               : <PlayerPreview username={playerTwo} label='Player Two' onReset={() => this.handleReset('playerTwo')} />
             }
           </div>
+          { playerOne && playerTwo && (
+            <button 
+            className='btn dark-btn btn-space'
+            onClick={() => this.setState({ battle: true })}
+            >
+            Battle
+            </button>
+          )}
          </div>
        </React.Fragment>
      )
