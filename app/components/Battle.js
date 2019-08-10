@@ -134,7 +134,7 @@ export default class Battle extends React.Component {
    })
   }
   render() {
-    const {playerOne, playerTwo } = this.state
+    const { playerOne, playerTwo } = this.state
      return (
        <React.Fragment>
          <Instructions />
