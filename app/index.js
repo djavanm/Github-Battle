@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import Popular from './components/Popular'
 import Battle from './components/Battle'
+import Nav from './components/Nav'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 // Component 
 // State
@@ -12,9 +14,13 @@ import Battle from './components/Battle'
 class App extends React.Component {
   render() {
     return (
-    <div className='container'>
-      <Battle />
-    </div>
+      <Router>
+        <div className='container'>
+          <Nav />
+          <Route exact path='/' component={Popular}/>
+          <Route path='/battle' component={Battle}/>
+        </div>
+      </Router>
     )
   }
 }

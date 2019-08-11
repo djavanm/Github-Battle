@@ -234,3 +234,11 @@ li {
   font-size: 20px;
   margin: 50px 0;
 }
+
+.space-between {
+  justify-content: space-between;
+}
+
+.nav li {
+  margin-right: 10px;
+}
